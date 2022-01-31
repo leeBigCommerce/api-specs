@@ -2780,11 +2780,11 @@ components:
                 example: a8458391-ef68-4fe5-9ec1-442e6a767364
                 type: string
               status:
-                description: 'The status will include one of the (string, optiona) - values defined under Order Statuses. This value is read-only. Do not attempt to modify or set this value in a POST or PUT operation.'
+                description: 'The status will include one of the (string, options) - values defined under Order Statuses. This value is read-only. Do not attempt to modify or set this value in a POST or PUT operation.'
                 example: Awaiting Fulfillment
                 type: string
               custom_status:
-                description: 'Contains the same (string, optiona) - value as the Order Statuses object''s `custom_label` property.'
+                description: 'Contains the same (string, options) - value as the Order Statuses object''s `custom_label` property.'
                 example: Awaiting Fulfillment
                 type: string
               subtotal_ex_tax:
@@ -2948,7 +2948,7 @@ components:
                 example: Send Saturday
                 maxLength: 65535
               customer_message:
-                description: 'Message that the customer entered (number, optiona) -o the `Order Comments` box during checkout.'
+                description: 'Message that the customer entered (number, options) -o the `Order Comments` box during checkout.'
                 example: Thank you
                 type: string
               discount_amount:
@@ -3085,12 +3085,11 @@ components:
               tax_provider_id:
                 type: string
                 description: |
-                  BasicTaxProvider - Tax is set to manual.
+                  BasicTaxProvider - Tax is set to manual and order is created in the store.
 
-                  AvaTaxProvider - This is for when the tax provider has been set to automatic and the order was NOT created by the API. Used for Avalara.
+                  AvaTaxProvider - Tax is set to automatic and order is created in the store. Used for Avalara.
 
-                  "" (blank) - When the tax provider is unknown. This includes legacy orders and orders previously created via API.
-                  This can be set when creating an order using a POST.
+                  "" (Null) - When the order is created via API, or the tax provider is unknown.
                 enum:
                   - BasicTaxProvider
                   - AvaTaxProvider
@@ -3098,7 +3097,7 @@ components:
               customer_locale:
                 type: 'string,'
                 example: en
-                description: The customer's locale
+                description: The customer's locale.
   requestBodies: null
   securitySchemes:
     X-Auth-Token:
@@ -4198,12 +4197,11 @@ components:
           type: string
         tax_provider_id:
           description: |
-            BasicTaxProvider - Tax is set to manual.
+            BasicTaxProvider - Tax is set to manual and order is created in the store.
 
-            AvaTaxProvider - This is for when the tax provider has been set to automatic and the order was NOT created by the API. Used for Avalara.
+            AvaTaxProvider - Tax is set to automatic and order is created in the store. Used for Avalara.
 
-            "" (blank) - When the tax provider is unknown. This includes legacy orders and orders previously created via API.
-            This can be set when creating an order using a POST.
+            "" (Null) - When the order is created via API, or the tax provider is unknown.
           enum:
             - BasicTaxProvider
             - AvaTaxProvider
@@ -4338,7 +4336,7 @@ components:
           type: string
         status:
           type: string
-          description: 'The status will include one of the (string, optiona) - values defined under Order Statuses. This value is read-only. Do not attempt to modify or set this value in a POST or PUT operation.'
+          description: 'The status will include one of the (string, options) - values defined under Order Statuses. This value is read-only. Do not attempt to modify or set this value in a POST or PUT operation.'
           example: Awaiting Fulfillment
         subtotal_tax:
           description: 'A read-only value. Do not attempt to set or modify this value in a POST or PUT operation. (Float, Float-As-String, Integer)'
