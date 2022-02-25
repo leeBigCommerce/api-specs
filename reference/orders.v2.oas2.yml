@@ -2781,7 +2781,7 @@ components:
                 example: Awaiting Fulfillment
                 type: string
               custom_status:
-                description: 'Contains the same (string, optional) - value as the Order Statuses object's `custom_label` property.'
+                description: 'Contains the same (string, optional) - value as the Order Statuses object’s `custom_label` property.'
                 example: Awaiting Fulfillment
                 type: string
               subtotal_ex_tax:
