@@ -4091,7 +4091,7 @@ components:
         customer_id:
           type: number
         customer_message:
-          description: 'Message that the customer entered (number, optional) -o the `Order Comments` box during checkout.'
+          description: 'Message that the customer entered (number, options) -o the `Order Comments` box during checkout.'
           example: Thank you
           type: string
         date_created:
