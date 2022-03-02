@@ -35,14 +35,14 @@ info:
 
     * `currency_id` - the display currency ID. Depending on the currency selected, the value may be different from the transactional currency.
     * `currency_code` - the currency code of the display currency used to present prices to the shopper on the storefront. Depending on the currency selected, the value may be different from the transactional currency.
-    * `currency_exchange_rate` - the exchange rate between the store's default currency and the display currency. For orders created using the V2 endpoints, this value is always 1 (only in the storefront this value can be different to 1).
+    * `currency_exchange_rate` - the exchange rate between the store’s default currency and the display currency. For orders created using the V2 endpoints, this value is always 1 (only in the storefront this value can be different to 1).
     * `default_currency_id` - the transactional currency ID.
     * `default_currency_code` - the currency code of the transactional currency the shopper pays in.
 
     The following additional fields are returned on orders when Multi-Currency is enabled on the store:
 
-    * `store_default_currency_code` - the currency code of the store's default currency.
-    * `store_default_to_transactional_exchange_rate` - the exchange rate between the store's default currency and the transactional currency used in the order.
+    * `store_default_currency_code` - the currency code of the store’s default currency.
+    * `store_default_to_transactional_exchange_rate` - the exchange rate between the store’s default currency and the transactional currency used in the order.
 
     **Example:**
 
@@ -98,7 +98,7 @@ paths:
 
         To update a product in an order, include `id` in the body. The body should only contain the fields that need to be updated. Those fields that are omitted will not be changed.
 
-        To remove a product from an order, set that product's `quantity` to `0`.
+        To remove a product from an order, set that product’s `quantity` to `0`.
 
         To learn more about creating or updating orders, see [Orders Overview](/api-docs/orders/orders-api-overview).
       summary: Update an Order
@@ -2884,7 +2884,7 @@ components:
                 example: Cash on Delivery
                 type: string
               payment_provider_id:
-                description: The external Transaction ID/Payment ID within this order's payment provider (if a payment provider was used).
+                description: The external Transaction ID/Payment ID within this order’s payment provider (if a payment provider was used).
                 example: null
                 type: string
                 nullable: true
@@ -3046,7 +3046,7 @@ components:
                           readOnly: true
                       readOnly: true
               order_source:
-                description: Orders submitted via the store's website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
+                description: Orders submitted via the store’s website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
                 example: www
                 type: string
               external_source:
@@ -3094,7 +3094,7 @@ components:
               customer_locale:
                 type: 'string,'
                 example: en
-                description: The customer's locale.
+                description: The customer’s locale.
   requestBodies: null
   securitySchemes:
     X-Auth-Token:
@@ -3291,7 +3291,7 @@ components:
           type: string
         cost_price_inc_tax:
           description: |-
-            The product's cost price including tax. (Float, Float-As-String, Integer)
+            The product’s cost price including tax. (Float, Float-As-String, Integer)
             The cost of your products to you; this is never shown to customers, but can be used for accounting purposes. Read Only
           example: '0.0000'
           type: string
@@ -4187,7 +4187,7 @@ components:
             - Manual
           type: string
         payment_provider_id:
-          description: The external Transaction ID/Payment ID within this order's payment provider (if a payment provider was used).
+          description: The external Transaction ID/Payment ID within this order’s payment provider (if a payment provider was used).
           example: ''
           type:
             - string
@@ -4235,7 +4235,7 @@ components:
         customer_locale:
           type: string
           example: en
-          description: The customer's locale
+          description: The customer’s locale
         total_ex_tax:
           description: 'Override value for the total, excluding tax. If specified, the field `total_inc_tax` is also required. (Float, Float-As-String, Integer)'
           example: '225.0000'
@@ -4333,7 +4333,7 @@ components:
           description: 2-letter ISO Alpha-2 code for the country.
         phone:
           type: string
-          description: Recipient's telephone number.
+          description: Recipient’s telephone number.
         email:
           type: string
           example: janedoe@example.com
@@ -4445,7 +4445,7 @@ components:
           example: false
           type: boolean
         order_source:
-          description: Orders submitted via the store's website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
+          description: Orders submitted via the store’s website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
           example: www
           type: string
         products:
