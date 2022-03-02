@@ -1081,7 +1081,7 @@ paths:
       description: |-
         Gets all shipping quotes persisted on an order.
 
-        This is a read only endpoint and the output can vary based on the shipping quote. A shipping quote can only be generated using the storefront at this time. Orders that are created in the control panel or via the API return a 204 for this endpoint since a shipping quote is not generated during that process.
+        This is a read only endpoint and the output can vary based on the shipping quote. A shipping quote can only be generated using the storefront at this time. Orders that are created in the control panel or using the API return a 204 for this endpoint since a shipping quote is not generated during that process.
       parameters:
         - $ref: '#/components/parameters/Accept'
         - $ref: '#/components/parameters/Content-Type'
@@ -3032,7 +3032,7 @@ components:
                     items:
                       title: Form Fields
                       type: object
-                      description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order via API.
+                      description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order with the API.
                       properties:
                         name:
                           description: Name of the form field
@@ -3046,12 +3046,12 @@ components:
                           readOnly: true
                       readOnly: true
               order_source:
-                description: Orders submitted via the store’s website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
+                description: Orders submitted from the store’s website will include a `www` value. Orders submitted with the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
                 example: www
                 type: string
               external_source:
                 description: |-
-                  This value identifies an external system that generated the order and submitted it to BigCommerce via the Orders API.
+                  This value identifies an external system that generated the order and submitted it to BigCommerce using the Orders API.
                   * When supplying the value, we recommend combining the type of system and vendor, e.g., ERP (Acumatica) or POS (Square).
                   * If you are migrating historical orders processed on another eCommerce platform to BigCommerce, supply the following code as the value: M-MIG. This code will exclude historical orders from the store’s GMV/order count, which factors into pricing.
                   * If you do not provide a value, then it will default to null..
@@ -3086,7 +3086,7 @@ components:
 
                   AvaTaxProvider - Tax is set to automatic and order is created in the store. Used for Avalara.
 
-                  "" (Null) - When the order is created via API, or the tax provider is unknown.
+                  "" (null) - When the order is created by API, or the tax provider is unknown.
                 enum:
                   - BasicTaxProvider
                   - AvaTaxProvider
@@ -3823,15 +3823,15 @@ components:
       title: formFields
       type: object
       readOnly: true
-      description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order via API.
+      description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order with the API.
       properties:
         name:
-          description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order via API.
+          description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order with the API.
           readOnly: true
           type: string
           example: License Id
         value:
-          description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order via API.
+          description: Read-Only. If you have required address form fields they will need to be set as optional before creating an order with the API.
           readOnly: true
           type: string
           example: 123BAF
@@ -4122,7 +4122,7 @@ components:
             - type: null
         external_source:
           description: |-
-            This value identifies an external system that generated the order and submitted it to BigCommerce via the Orders API.
+            This value identifies an external system that generated the order and submitted it to BigCommerce with the the Orders API.
             * When supplying the value, we recommend combining the type of system and vendor, e.g., ERP (Acumatica) or POS (Square).
             * If you are migrating historical orders processed on another eCommerce platform to BigCommerce, supply the following code as the value: M-MIG. This code will exclude historical orders from the store’s GMV/order count, which factors into pricing.
             * If you do not provide a value, then it will default to null.
@@ -4226,7 +4226,7 @@ components:
 
             AvaTaxProvider - Tax is set to automatic and order is created in the store. Used for Avalara.
 
-            "" (Null) - When the order is created via API, or the tax provider is unknown.
+            "" (Null) - When the order is created with the API, or the tax provider is unknown.
           enum:
             - BasicTaxProvider
             - AvaTaxProvider
@@ -4445,7 +4445,7 @@ components:
           example: false
           type: boolean
         order_source:
-          description: Orders submitted via the store’s website will include a `www` value. Orders submitted via the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
+          description: Orders submitted from the store’s website will include a `www` value. Orders submitted with the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
           example: www
           type: string
         products:
@@ -4571,7 +4571,7 @@ components:
                   - The modifier value for modifier types without a list of defined values, such as text field or date field modifiers.
 
                   Notes:
-                  - The following option types are not currently supported via api:
+                  - The API does not currently support the following option types:
                     - File upload
                     - Pick list
                   - For date modifiers use either the `YYYY-MM-DDThh:mm:ss±hh:mm` or the `YYYY-MM-DD` ISO-8601 formats. The date field modifier values are saved and retuned as timestamps. For values entered using the YYYY-MM-DD format, the store timezone is used when creating the timestamp.
