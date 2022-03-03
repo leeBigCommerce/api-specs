@@ -3086,7 +3086,7 @@ components:
 
                   AvaTaxProvider - Tax is set to automatic and order is created in the store. Used for Avalara.
 
-                  "" (null) - When the order is created by API, or the tax provider is unknown.
+                  "" (empty string) - The order is created with the API, or the tax provider is unknown.
                 enum:
                   - BasicTaxProvider
                   - AvaTaxProvider
