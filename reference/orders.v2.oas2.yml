@@ -4445,7 +4445,7 @@ components:
           example: false
           type: boolean
         order_source:
-          description: Orders submitted from the store’s website will include a `www` value. Orders submitted with the API will be set to `external`. A read-only value. Do not pass in a POST or PUT.
+          description: Orders submitted from the store’s website will include a `www` value. Orders submitted with the API will be set to `external`. This value is read-only. Do not pass in a POST or PUT.
           example: www
           type: string
         products:
