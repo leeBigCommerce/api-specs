@@ -1,7 +1,11 @@
 # [DEVDOCS-]
+{Ticket number or summary of work}
 
 ## What changed?
-* thing_that_changed
+Provide a bulleted list in the present tense
+* 
 
 ## Anything else?
-Related PRs, salient notes, etc
+Add related PRs, salient notes, ticket numbers, etc.
+
+ping {names}

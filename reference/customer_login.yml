@@ -1,13 +1,26 @@
-openapi: 3.0.1
+openapi: '3.0.1'
 info:
   title: Customer Login (SSO)
   description: |-
     Enable single sign-on for shoppers on BigCommerce hosted storefronts.
 
-    [Learn more about the customer login API](/api-docs/customers/customer-login-api).
-  version: ""
+    [Learn more about the customer login API](/docs/start/authentication/customer-login).
+  
+    For info about API accounts, see our [Guide to API Accounts](/docs/start/authentication/api-accounts).
+        
+    For info about authenticating BigCommerce APIs, see [Authentication and Example Requests](/docs/start/authentication#user-generated-jwts).
+  termsOfService: 'https://www.bigcommerce.com/terms'
+  contact:
+    name: BigCommerce
+    url: 'https://www.bigcommerce.com'
+    email: support@bigcommerce.com
+  version: ''
 servers:
-- url: https://yourstore.example.com
+  - url: 'https://{store_domain}'
+    variables:
+      store_domain:
+        default: your_store.example.com
+        description: 'The [URL authority](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#authority) of the storefront.'
 tags:
 - name: Login Token
 paths:
@@ -19,7 +32,7 @@ paths:
       description: |-
         The customer login access point URL.
 
-        [Learn more about the Customer Login API](/api-docs/customers/customer-login-api).
+        [Learn more about the Customer Login API](/docs/start/authentication/customer-login).
 
         ## Example
 
@@ -88,7 +101,4 @@ components:
             **(Optional)** Field containing the expected IP address for the request. If provided, BigCommerce will check that it matches the browser trying to log in. If there is not a match, it will be rejected.
           example: '"111.222.333.444"'
       x-internal: false
-x-stoplight:
-  docs:
-    includeDownloadLink: true
-    showModels: false
+

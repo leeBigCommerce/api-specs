@@ -1,15 +1,26 @@
-openapi: 3.0.1
+openapi: '3.0.1'
 info:
   title: Content
   description: |-
     Manage blog posts, blog tags, content pages, and redirects.
 
-    <!-- theme: warning -->
-    > #### Note
-    > * Redirects V2 are deprecated; use [V3 Redirects](/api-reference/storefront/redirects/redirects/getredirects) instead. 
+    > #### Warning
+    > **Deprecations**
+    > * Redirects V2 are deprecated; use [Redirects V3](/docs/rest-management/redirects) instead. 
+    > * Pages V2 are deprecated; use [Pages V3](/docs/rest-content/pages) instead.
   version: ''
+  termsOfService: 'https://www.bigcommerce.com/terms'
+  contact:
+    name: BigCommerce
+    url: 'https://www.bigcommerce.com'
+    email: support@bigcommerce.com
 servers:
-  - url: 'https://api.bigcommerce.com'
+  - url: 'https://api.bigcommerce.com/stores/{store_hash}/v2'
+    variables:
+      store_hash:
+        default: store_hash
+        description: Permanent ID of the BigCommerce store.
+    description: BigCommerce API Gateway
 security:
   - X-Auth-Token: []
 tags:
@@ -18,19 +29,15 @@ tags:
   - name: Pages
   - name: Redirects
 paths:
-  '/stores/{store_hash}/v2/blog/tags':
+  '/blog/tags':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
       tags:
         - Blog Tags
       summary: Get All Blog Tags
       description: Returns a list of *Blog Tags*.
       operationId: getAllBlogTags
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -40,7 +47,9 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/blogTags'
-  '/stores/{store_hash}/v2/blog/posts':
+  '/blog/posts':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
       tags:
         - Blog Posts
@@ -48,11 +57,6 @@ paths:
       description: 'Returns all *Blog Posts*. Default sorting is by published_date, beginning with the most recent post.'
       operationId: getAllBlogPosts
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
         - name: is_published
           in: query
           description: Filter param.
@@ -103,7 +107,7 @@ paths:
                   title: Hello Again
                   url: /blog/hello-again/
                   preview_url: /blog/hello-again/
-                  body: <p>Jelly beans muffin marzipan gingerbread donut dessert. Cheesecake cheesecake sugar plum cookie cake tart. Soufflé sesame snaps jelly beans brownie chocolate tart. Marshmallow jujubes candy pie. Gummies lemon drops tart soufflé pastry pie. Caramels wafer biscuit gummi bears. Liquorice toffee wafer bear claw marzipan jelly-o. Dessert bear claw topping icing croissant. Pie bonbon chocolate bar chocolate bar tiramisu chocolate lemon drops candy.</p><p>Marshmallow cupcake sweet roll candy marshmallow caramels cotton candy pie icing. Powder jelly beans chupa chups lollipop liquorice marzipan dessert soufflé sesame snaps. Macaroon chupa chups gummies cheesecake ice cream caramels sesame snaps cotton candy gingerbread. Chocolate cake fruitcake tart bear claw lemon drops tart dragée tart apple pie. Halvah chupa chups soufflé jelly soufflé marshmallow. Croissant tart tart. Gingerbread apple pie biscuit.</p><p>Wafer lemon drops tart pastry brownie chocolate bar jelly. Dragée muffin cupcake liquorice caramels marzipan gingerbread marzipan. Apple pie pudding jelly sweet roll croissant bonbon wafer. Cookie chocolate bar sesame snaps bonbon macaroon candy canes donut sugar plum. Bear claw bonbon tootsie roll bonbon. Apple pie gummies donut sweet. Marzipan bear claw cotton candy topping dragée bonbon danish powder.</p>
+                  body: "<p>Jelly beans muffin marzipan gingerbread donut dessert. Cheesecake cheesecake sugar plum cookie cake tart. Soufflé sesame snaps jelly beans brownie chocolate tart. Marshmallow jujubes candy pie. Gummies lemon drops tart soufflé pastry pie. Caramels wafer biscuit gummi bears. Liquorice toffee wafer bear claw marzipan jelly-o. Dessert bear claw topping icing croissant. Pie bonbon chocolate bar chocolate bar tiramisu chocolate lemon drops candy.</p><p>Marshmallow cupcake sweet roll candy marshmallow caramels cotton candy pie icing. Powder jelly beans chupa chups lollipop liquorice marzipan dessert soufflé sesame snaps. Macaroon chupa chups gummies cheesecake ice cream caramels sesame snaps cotton candy gingerbread. Chocolate cake fruitcake tart bear claw lemon drops tart dragée tart apple pie. Halvah chupa chups soufflé jelly soufflé marshmallow. Croissant tart tart. Gingerbread apple pie biscuit.</p><p>Wafer lemon drops tart pastry brownie chocolate bar jelly. Dragée muffin cupcake liquorice caramels marzipan gingerbread marzipan. Apple pie pudding jelly sweet roll croissant bonbon wafer. Cookie chocolate bar sesame snaps bonbon macaroon candy canes donut sugar plum. Bear claw bonbon tootsie roll bonbon. Apple pie gummies donut sweet. Marzipan bear claw cotton candy topping dragée bonbon danish powder.</p>"
                   tags:
                     - sugar
                     - sweet
@@ -125,7 +129,7 @@ paths:
                   title: Hello
                   url: /blog/hello/
                   preview_url: /blog/hello/
-                  body: <p>Jelly beans muffin marzipan gingerbread donut dessert. Cheesecake cheesecake sugar plum cookie cake tart. Soufflé sesame snaps jelly beans brownie chocolate tart. Marshmallow jujubes candy pie. Gummies lemon drops tart soufflé pastry pie. Caramels wafer biscuit gummi bears. Liquorice toffee wafer bear claw marzipan jelly-o. Dessert bear claw topping icing croissant. Pie bonbon chocolate bar chocolate bar tiramisu chocolate lemon drops candy.</p><p>Marshmallow cupcake sweet roll candy marshmallow caramels cotton candy pie icing. Powder jelly beans chupa chups lollipop liquorice marzipan dessert soufflé sesame snaps. Macaroon chupa chups gummies cheesecake ice cream caramels sesame snaps cotton candy gingerbread. Chocolate cake fruitcake tart bear claw lemon drops tart dragée tart apple pie. Halvah chupa chups soufflé jelly soufflé marshmallow. Croissant tart tart. Gingerbread apple pie biscuit.</p><p>Wafer lemon drops tart pastry brownie chocolate bar jelly. Dragée muffin cupcake liquorice caramels marzipan gingerbread marzipan. Apple pie pudding jelly sweet roll croissant bonbon wafer. Cookie chocolate bar sesame snaps bonbon macaroon candy canes donut sugar plum. Bear claw bonbon tootsie roll bonbon. Apple pie gummies donut sweet. Marzipan bear claw cotton candy topping dragée bonbon danish powder.</p>
+                  body: "<p>Jelly beans muffin marzipan gingerbread donut dessert. Cheesecake cheesecake sugar plum cookie cake tart. Soufflé sesame snaps jelly beans brownie chocolate tart. Marshmallow jujubes candy pie. Gummies lemon drops tart soufflé pastry pie. Caramels wafer biscuit gummi bears. Liquorice toffee wafer bear claw marzipan jelly-o. Dessert bear claw topping icing croissant. Pie bonbon chocolate bar chocolate bar tiramisu chocolate lemon drops candy.</p><p>Marshmallow cupcake sweet roll candy marshmallow caramels cotton candy pie icing. Powder jelly beans chupa chups lollipop liquorice marzipan dessert soufflé sesame snaps. Macaroon chupa chups gummies cheesecake ice cream caramels sesame snaps cotton candy gingerbread. Chocolate cake fruitcake tart bear claw lemon drops tart dragée tart apple pie. Halvah chupa chups soufflé jelly soufflé marshmallow. Croissant tart tart. Gingerbread apple pie biscuit.</p><p>Wafer lemon drops tart pastry brownie chocolate bar jelly. Dragée muffin cupcake liquorice caramels marzipan gingerbread marzipan. Apple pie pudding jelly sweet roll croissant bonbon wafer. Cookie chocolate bar sesame snaps bonbon macaroon candy canes donut sugar plum. Bear claw bonbon tootsie roll bonbon. Apple pie gummies donut sweet. Marzipan bear claw cotton candy topping dragée bonbon danish powder.</p>"
                   tags:
                     - cupcakes
                     - sugar
@@ -145,7 +149,7 @@ paths:
                   title: Your first blog post!
                   url: /your-first-blog-post/
                   preview_url: /your-first-blog-post/
-                  body: '<p> <strong>Welcome to your blog!</strong><br> A blog is a great place to share details on your products, business and whatever else you think your shoppers might like to hear from you. You can include photos in your blog posts and even videos. For ideas and inspiration on how to structure your blog, take a look at the Bigcommerce <a href=''http://blog.bigcommerce.com/'' target=''_blank'' rel=''nofollow''>ecommerce blog</a>.</p><p><strong>How can I delete this post?</strong><br>To delete this post and add your own, login to your <a href=''/admin'' target=''_blank''>admin area</a> and go to Storefront > Blog in the left hand menu.</p><p><strong>Powered by Bigcommerce</strong><br>Your website, online store and blog are powered by Bigcommerce <a href=''http://www.bigcommerce.com/'' target=''_blank'' rel=''nofollow''>ecommerce software</a>. It includes everything you need to run a beautiful online store including <a href=''http://www.bigcommerce.com/templates/'' target=''_blank'' rel=''nofollow''>ecommerce website templates</a>, <a href=''http://www.bigcommerce.com/features/hosting/'' target=''_blank'' rel=''nofollow''>ecommerce hosting</a>, an <a href=''http://www.bigcommerce.com/features/setup/'' target=''_blank'' rel=''nofollow''>online shopping cart</a> and more.</p>'
+                  body: "<p><strong>Welcome to your blog!</strong><br> A blog is a great place to share details on your products, business and whatever else you think your shoppers might like to hear from you. You can include photos in your blog posts and even videos. For ideas and inspiration on how to structure your blog, take a look at the BigCommerce <a href='http://blog.bigcommerce.com/' target='_blank' rel='nofollow'>ecommerce blog</a>.</p><p><strong>How can I delete this post?</strong><br>To delete this post and add your own, login to your <a href='/admin' target='_blank'>admin area</a> and go to Storefront > Blog in the left hand menu.</p><p><strong>Powered by BigCommerce</strong><br>Your website, online store and blog are powered by BigCommerce <a href='http://www.bigcommerce.com/' target='_blank' rel='nofollow'>ecommerce software</a>. It includes everything you need to run a beautiful online store including <a href='http://www.bigcommerce.com/templates/' target='_blank' rel='nofollow'>ecommerce website templates</a>, <a href='http://www.bigcommerce.com/features/hosting/' target='_blank' rel='nofollow'>ecommerce hosting</a>, an <a href='http://www.bigcommerce.com/features/setup/' target='_blank' rel='nofollow'>online shopping cart</a> and more.</p>"
                   tags:
                     - Blog
                     - SEO
@@ -174,16 +178,11 @@ paths:
         **Notes**
 
         * When including `published_date` in a request, supply it as a flat date string (not an object) in valid <a href="http://tools.ietf.org/html/rfc2822#section-3.3" target="_blank">RFC 2822</a>. The&#160;example request below includes a `published_date` in RFC 2822 format.
-
         * Blog posts default to draft status. To publish blog posts to the storefront, set the `is_published` property to `true`.
         * If a custom URL is not provided, the post’s URL will be generated based on the value of `title`.
       operationId: createABlogPosts
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -231,11 +230,6 @@ paths:
       description: Deletes a page of `Blog Posts`.
       operationId: deleteAllBlogPosts
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
         - name: page
           in: query
           description: Filter param.
@@ -256,27 +250,23 @@ paths:
         '204':
           description: ''
           content: {}
-  '/stores/{store_hash}/v2/blog/posts/{id}':
+  '/blog/posts/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
+      - name: id
+        in: path
+        description: ID of the blog post.
+        required: true
+        schema:
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          type: integer
     get:
       tags:
         - Blog Posts
       summary: Get a Blog Post
       description: Returns a single *Blog Post*.
       operationId: getABlogPost
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the blog post.
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '200':
           description: ''
@@ -319,17 +309,7 @@ paths:
         * Blog posts default to draft status. To publish blog posts to the storefront, set the `is_published` property to `true`.
       operationId: updateABlogPost
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the blog post.
-          required: true
-          schema:
-            type: integer
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -365,7 +345,7 @@ paths:
                 author: BigCommerce
                 thumbnail_path: ''
         '207':
-          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occured, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
+          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occurred, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
           content:
             application/json:
               schema:
@@ -377,37 +357,19 @@ paths:
       summary: Delete a Blog Post
       description: Deletes a *Blog Post*.
       operationId: deleteABlogPost
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the blog post.
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '204':
           description: ''
           content: {}
-  '/stores/{store_hash}/v2/blog/posts/count':
+  '/blog/posts/count':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
       tags:
         - Blog Posts
       summary: Get A Count of All Blog Posts
       description: Returns a count of all *Blog Posts*.
       operationId: getACountOfAllBlogPosts
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -417,19 +379,23 @@ paths:
                 $ref: '#/components/schemas/count_Response'
               example:
                 count: 27
-  '/stores/{store_hash}/v2/pages':
+  '/pages':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
+      deprecated: true
       tags:
         - Pages
       summary: Get All Pages
-      description: 'Returns a list of *Pages*. Default sorting is by auto-generated ID from oldests to newest. This endpoint is deprecated. '
+      description: | 
+        Returns a list of *Pages*. Default sorting is by auto-generated ID from oldest to newest.
+
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To get one or more pages, use Pages V3ʼs [Get pages](/docs/rest-content/pages#get-pages) endpoint. To get a single page, use Pages V3ʼs [Get a page](/docs/rest-content/pages#get-a-page) endpoint.
       operationId: getAllPages
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
         - name: page
           in: query
           description: Filter param.
@@ -475,13 +441,13 @@ paths:
                   meta_title: ''
                   search_keywords: ''
                   meta_keywords: ''
-      deprecated: true
     post:
+      deprecated: true
       tags:
         - Pages
       summary: Create a Page
       description: |-
-        Creates a *Page*. The payload limit is 1MB. This endpoint is deprecated.
+        Creates a *Page*. The request payload limit is 1MB.
 
         **Required Fields**
         *   `type`
@@ -496,13 +462,14 @@ paths:
         ## Content Type
 
         The default value for `content_type` is `text/html`; however, if `page_type` is set to `raw`, `content_type` can be changed to `text/javascript` or `application/json`. Updating this field allows you to place a JavaScript or a JSON file in the root directory.
+
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To create one or more pages, use Pages V3ʼs [Create pages](/docs/rest-content/pages#create-pages) endpoint. 
       operationId: createAPage
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -518,7 +485,7 @@ paths:
                   name: Contact Form
                   url: /contact-us/
                   meta_description: string
-                  body: <p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>
+                  body: "<p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>"
                   mobile_body: '0'
                   has_mobile_version: false
                   is_visible: true
@@ -548,7 +515,7 @@ paths:
                 name: Contact Form
                 url: /contact-us/
                 meta_description: ''
-                body: We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.
+                body: "We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance."
                 mobile_body: ''
                 has_mobile_version: false
                 feed: ''
@@ -561,34 +528,36 @@ paths:
                 search_keywords: ''
                 meta_keywords: ''
         '207':
-          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occured, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
+          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occurred, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
           content:
             application/json:
               schema:
                 type: object
-      deprecated: true
       x-codegen-request-body-name: body
-  '/stores/{store_hash}/v2/pages/{id}':
+  '/pages/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
+      - name: id
+        in: path
+        description: ID of the page.
+        required: true
+        schema:
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          type: integer
     get:
+      deprecated: true
       tags:
         - Pages
       summary: Get A Page
-      description: Returns a *Page*. This endpoint is deprecated.
+      description: |
+        Returns a *Page*. 
+
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To get a single page, use Pages V3ʼs [Get a page](/docs/rest-content/pages#get-a-page) endpoint.
       operationId: getAPage
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the page.
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '200':
           description: ''
@@ -616,28 +585,24 @@ paths:
                 link: ''
                 mobile_body: '0'
                 url: /rss-syndication/
-      deprecated: true
     put:
+      deprecated: true
       tags:
         - Pages
       summary: Update a Page
       description: |-
-        Updates a *Page*. The payload limit is 1MB. This endpoint is deprecated.
+        Updates a *Page*. The request payload limit is 1MB.
 
         **Read Only Fields**
         * id
+
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To update multiple pages, use Pages V3ʼs [Update pages](/docs/rest-content/pages#update-pages) endpoint. To update a single page, use Pages V3ʼs [Update a page](/docs/rest-content/pages#update-a-page) endpoint.
       operationId: updateAPage
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -655,7 +620,7 @@ paths:
                 id: 2
                 name: Shipping & Returns
                 meta_title: ''
-                body: '<em>To edit this page simply login to the control panel, click the <strong style="font-weight: 400">Website Content</strong> tab and choose the </em> <strong style="font-weight: 400"><em>View Web Pages option. Click Edit next to the Shipping & Returns page and you can change this text. A sample returns policy is shown below which you can edit as needed.</em><em style="font-style: normal"><br/><br/></em></strong><em style="font-style: normal"><strong>Returns Policy</strong></em><strong style="font-weight: 400"></em></em><em style="font-style: normal"><br/><br/></em>You may return most new, unopened items within 30 days of delivery for a full refund. We''ll also pay the return shipping costs if the return is a result of our error (you received an incorrect or defective item, etc.).<br/><br/>You should expect to receive your refund within four weeks of giving your package to the return shipper, however, in many cases you will receive a refund more quickly. This time period includes the transit time for us to receive your return from the shipper (5 to 10 business days), the time it takes us to process your return once we receive it (3 to 5 business days), and the time it takes your bank to process our refund request (5 to 10 business days).<br/><br/>If you need to return an item, please <a href="/contact-us/">Contact Us</a> with your order number and details about the product you would like to return. We will respond quickly with instructions for how to return items from your order.<br/><br/></strong><strong>Shipping</em></em></em></strong><strong style="font-weight: 400"><em style="font-style: normal"><br/><br/></em>We can ship to virtually any address in the world. Note that there are restrictions on some products, and some products cannot be shipped to international destinations.<br/><br/>When you place an order, we will estimate shipping and delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page.<br/><br/>Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.<br/>'
+                body: "<em>To edit this page simply login to the control panel, click the <strong style='font-weight: 400'>Website Content</strong> tab and choose the </em> <strong style='font-weight: 400'><em>View Web Pages option. Click Edit next to the Shipping & Returns page and you can change this text. A sample returns policy is shown below which you can edit as needed.</em><em style='font-style: normal'><br/><br/></em></strong><em style='font-style: normal'><strong>Returns Policy</strong></em><strong style='font-weight: 400'></em></em><em style='font-style: normal'><br/><br/></em>You may return most new, unopened items within 30 days of delivery for a full refund. We'll also pay the return shipping costs if the return is a result of our error (you received an incorrect or defective item, etc.).<br/><br/>You should expect to receive your refund within four weeks of giving your package to the return shipper, however, in many cases you will receive a refund more quickly. This time period includes the transit time for us to receive your return from the shipper (5 to 10 business days), the time it takes us to process your return once we receive it (3 to 5 business days), and the time it takes your bank to process our refund request (5 to 10 business days).<br/><br/>If you need to return an item, please <a href='/contact-us/'>Contact Us</a> with your order number and details about the product you would like to return. We will respond quickly with instructions for how to return items from your order.<br/><br/></strong><strong>Shipping</em></em></em></strong><strong style='font-weight: 400'><em style='font-style: normal'><br/><br/></em>We can ship to virtually any address in the world. Note that there are restrictions on some products, and some products cannot be shipped to international destinations.<br/><br/>When you place an order, we will estimate shipping and delivery dates for you based on the availability of your items and the shipping options you choose. Depending on the shipping provider you choose, shipping date estimates may appear on the shipping quotes page.<br/><br/>Please also note that the shipping rates for many items we sell are weight-based. The weight of any such item can be found on its detail page. To reflect the policies of the shipping companies we use, all weights will be rounded up to the next full pound.<br/>"
                 is_visible: true
                 parent_id: 0
                 sort_order: 2
@@ -672,57 +637,46 @@ paths:
                 mobile_body: ''
                 url: /shipping-returns/
         '207':
-          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occured, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
+          description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occurred, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
           content:
             application/json:
               schema:
                 type: object
-      deprecated: true
       x-codegen-request-body-name: body
     delete:
+      deprecated: true
       tags:
         - Pages
       summary: Delete a Page
-      description: 'Deletes a *Page*. This endpoint is deprecated. '
+      description: |
+        Deletes a *Page*.
+
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To delete multiple pages, use Pages V3ʼs [Delete pages](/docs/rest-content/pages#delete-pages) endpoint. To delete a single page, use Pages V3ʼs [Delete a page](/docs/rest-content/pages#delete-a-page) endpoint. 
       operationId: deleteAPage
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the page.
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '204':
           description: ''
           content: {}
-      deprecated: true
-  '/stores/{store_hash}/v2/redirects':
+  '/redirects':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
+      deprecated: true
       tags:
         - Redirects
       summary: Get All Redirects
       description: |-
         Returns a list all *Redirect URLs*. 
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see  [Get Redirects v3](/api-reference/storefront/redirects/redirects/getredirects) to manage redirects URLs.
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To get redirect URLs, use Redirects V3ʼs [Get redirects](/docs/rest-management/redirects#get-redirects) endpoint.
       operationId: getAListofRedirects
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
         - name: page
           in: query
           description: Filter param.
@@ -748,7 +702,6 @@ paths:
                   $ref: '#/components/schemas/redirect'
             Response Schema:
               example: ''
-      deprecated: true
     post:
       tags:
         - Redirects
@@ -764,17 +717,13 @@ paths:
         *   url
 
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see [Upsert Redirects v3](/api-reference/store-management/redirects/redirects/upsertredirects) to upsert new redirect data.
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To upsert new redirect data, use Redirects V3ʼs [Upsert redirects](/docs/rest-management/redirects#upsert-redirects) endpoint.
       operationId: createARedirect
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -797,57 +746,47 @@ paths:
                 url: 'http://store.example.com/mens'
       x-codegen-request-body-name: body
     delete:
+      deprecated: true
       tags:
         - Redirects
       summary: Delete All Redirects
       description: |-
         By default, it deletes all *Redirect URLs* in a store. 
 
-        <!-- theme: warning -->
 
-        > #### Deprecated
-
-        > Avoid using this API operation if possible. It will be removed in a future version.
-
-        > For the most up-to-date version of this API, see [Delete Redirects v3](/api-reference/store-management/redirects/redirects/deleteredirects) to delete redirects URLs.
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To delete redirect URLs, use Redirects V3ʼs [Delete redirects](/docs/rest-management/redirects#delete-redirects) endpoint.
       operationId: deleteAllRedirects
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '204':
           description: ''
           content: {}
-  '/stores/{store_hash}/v2/redirects/{id}':
+  '/redirects/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
+      - name: id
+        in: path
+        description: ID of the redirect URL.
+        required: true
+        schema:
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          type: integer
     get:
+      deprecated: true
       tags:
         - Redirects
       summary: Get a Redirect
       description: |-
         Returns a single *Redirect URL*.
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see [Get Redirects v3](/api-reference/storefront/redirects/redirects/getredirects) to get a redirect URL.
+        > #### Warning
+        > **Deprecated** 
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To get a redirect URL, use Redirects V3ʼs [Get redirects](/docs/rest-management/redirects#get-redirects) endpoint.
       operationId: getARedirectURL
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the redirect url
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '200':
           description: ''
@@ -862,7 +801,6 @@ paths:
                   type: product
                   ref: 111
                 url: 'http://store-url.mybigcommerce.com/towels/bath-towels/hand-towels/'
-      deprecated: true
     put:
       tags:
         - Redirects
@@ -878,25 +816,13 @@ paths:
         *   url
 
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see [Upsert Redirects v3](/api-reference/storefront/redirects/redirects/upsertredirects) to update redirect data.
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To update redirect data, use Redirects V3ʼs [Upsert redirects](/docs/rest-management/redirects#upsert-redirects) endpoint.
       operationId: updateARedirectURL
       parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the redirect url
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
+        - $ref: '#/components/parameters/ContentType'
       requestBody:
         content:
           application/json:
@@ -961,48 +887,31 @@ paths:
       description: |-
         Deletes a *Redirect URL*.
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see [Delete Redirects v3](/api-reference/store-management/redirects/redirects/deleteredirects) to delete a redirect URL.
+        > #### Warning
+        > **Deprecated** 
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To delete a redirect URL, use Redirects V3ʼs [Delete redirects](/docs/rest-management/redirects#delete-redirects) endpoint.
       operationId: deleteARedirect
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: Id of the redirect url
-          required: true
-          schema:
-            exclusiveMaximum: false
-            exclusiveMinimum: false
-            type: integer
       responses:
         '204':
           description: ''
           content: {}
-  '/stores/{store_hash}/v2/redirects/count':
+  '/redirects/count':
+    parameters:
+      - $ref: '#/components/parameters/Accept'
     get:
+      deprecated: true
       tags:
         - Redirects
       summary: Get a Count of Redirects
       description: |-
         Gets a count of *Redirect URLs* in a store.
 
-        <!-- theme: warning -->
-        > #### Deprecated
-        > Avoid using this API operation if possible. It will be removed in a future version.
-        > For the most up-to-date version of this API, see  [Get Redirects v3](/api-reference/storefront/redirects/redirects/getredirects) to get a count of redirects.
+        > #### Warning
+        > **Deprecated**
+        > * This API operation is deprecated. Avoid using this API operation if possible. It will be removed in a future version.
+        > * To get a count of redirects, use the `meta` object data returned with the Redirects V3ʼs [Get redirects](/docs/rest-management/redirects#get-redirects) endpoint.
       operationId: getACountOfRedirects
-      parameters:
-        - name: store_hash
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: ''
@@ -1012,8 +921,24 @@ paths:
                 $ref: '#/components/schemas/count_Response'
               example:
                 count: 27
-      deprecated: true
 components:
+  parameters:
+    Accept:
+      name: Accept
+      in: header
+      required: true
+      description: 'The [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of the response body.'
+      schema:
+        type: string
+        default: 'application/json'
+    ContentType:
+      name: Content-Type
+      in: header
+      required: true
+      description: 'The [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of the request body.'
+      schema:
+        type: string
+        default: 'application/json'
   schemas:
     blogPost_Full:
       title: blogPost_Full
@@ -1193,7 +1118,7 @@ components:
           description: Store-owner notes on the customer.
         tax_exempt_category:
           type: string
-          description: 'If applicable, the tax-exempt category of the shopper''s customer account. You can apply a tax-exempt category to multiple customers. This code should match the exemption codes provided by the third-party integration.'
+          description: If applicable, the tax-exempt category of the shopperʼs customer account. You can apply a tax-exempt category to multiple customers. This code should match the exemption codes provided by the third-party integration.
         accepts_marketing:
           type: boolean
           description: |
@@ -1576,7 +1501,7 @@ components:
         body:
           type: string
           description: 'HTML or variable that populates this page’s `<body>` element, in default/desktop view. Required in POST if page type is `raw`.'
-          example: <p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>
+          example: "<p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>"
         mobile_body:
           type: string
           description: HTML to use for this page's body when viewed in the mobile template (deprecated).
@@ -1612,7 +1537,7 @@ components:
           description: Comma-separated list of SEO-relevant keywords to include in the page’s `<meta/>` element.
         feed:
           type: string
-          description: If page type is `rss_feed` the n this field is visisble. Required in POST required for `rss page` type.
+          description: If page type is `rss_feed` then this field is visible. Required in POST required for `rss page` type.
         link:
           type: string
           description: If page type is `link` this field is returned. Required in  POST to create a `link` page.
@@ -1667,7 +1592,7 @@ components:
         body:
           type: string
           description: 'HTML or variable that populates this page’s `<body>` element, in default/desktop view. Required in POST if page type is `raw`.'
-          example: <p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>
+          example: "<p>We're happy to answer questions or help you with returns.<br />Please fill out the form below if you need assistance.</p>"
         mobile_body:
           type: string
           description: HTML to use for this page's body when viewed in the mobile template (deprecated).
@@ -1703,7 +1628,7 @@ components:
           description: Comma-separated list of SEO-relevant keywords to include in the page’s `<meta/>` element.
         feed:
           type: string
-          description: If page type is `rss_feed` then this field is visisble.
+          description: If page type is `rss_feed` then this field is visible.
         link:
           type: string
           description: If page type is `link` this field is returned.
@@ -1716,29 +1641,27 @@ components:
             - text/html
   securitySchemes:
     X-Auth-Token:
-      type: apiKey
+      name: X-Auth-Token
       description: |-
-        ### OAuth Scopes
-        |  **UI Name** | **Permission** | **Parameter** |
-        | --- | --- | --- |
+        ### OAuth scopes
+
+        | UI Name | Permission | Parameter |
+        |:--------|:-----------|:----------|
         |  Content | modify | `store_v2_content` |
         |  Content | read-only | `store_v2_content_read_only` |
 
-        ### Headers
-
-        |Header|Parameter|Description|
-        |-|-|-|
-        |`X-Auth-Token`|`access_token `|Obtained by creating an API account or installing an app in a BigCommerce control panel.|
-
-        ### Example
-
-        ```http
-        GET /stores/{store_hash}/v3/catalog/summary
-        host: api.bigcommerce.com
-        Content-Type: application/json
-        X-Auth-Token: {access_token}
-        ```
-
-        * For more information on Authenticating BigCommerce APIs, see: [Authentication](/api-docs/getting-started/authentication).
-      name: X-Auth-Token
+        ### Authentication header
+        
+        | Header | Argument | Description |
+        |:-------|:---------|:------------|
+        | `X-Auth-Token` | `access_token` | For more about API accounts that generate `access_token`s, see our [Guide to API Accounts](/docs/start/authentication/api-accounts). |
+        
+        ### Further reading
+        
+        For example requests and more information about authenticating BigCommerce APIs, see [Authentication and Example Requests](/docs/start/authentication#x-auth-token-header-example-requests).
+        
+        For more about BigCommerce OAuth scopes, see our [Guide to API Accounts](/docs/start/authentication/api-accounts#oauth-scopes).
+        
+        For a list of API status codes, see [API Status Codes](/docs/start/about/status-codes).
+      type: apiKey
       in: header
